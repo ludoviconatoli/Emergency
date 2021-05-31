@@ -71,9 +71,9 @@ public class Simulator {
 			this.queue.add(e);
 			this.patients.add(p);
 			
-			ora = ora.plus(T_ARRIVAL);
 			inseriti++;
-			
+			ora = ora.plus(T_ARRIVAL);
+						
 		}
 	}
 	
@@ -166,7 +166,7 @@ public class Simulator {
 			}else if(p.getColor().equals(Patient.ColorCode.YELLOW)) {
 				this.queue.add(new Event(ora.plus(TIMEOUT_YELLOW), EventType.TIMEOUT, p));
 				this.waitingRoom.add(p);
-			}else {
+			}else if (p.getColor().equals(Patient.ColorCode.RED)){
 				this.queue.add(new Event(ora.plus(TIMEOUT_RED), EventType.TIMEOUT, p));
 				this.waitingRoom.add(p);
 			}
@@ -185,7 +185,7 @@ public class Simulator {
 					this.queue.add(new Event(ora.plus(DURATION_WHITE), EventType.TREATED, primo));
 				}else if(primo.getColor().equals(Patient.ColorCode.YELLOW)) {
 					this.queue.add(new Event(ora.plus(DURATION_YELLOW), EventType.TREATED, primo));
-				}else {
+				}else if(primo.getColor().equals(ColorCode.RED)){
 					this.queue.add(new Event(ora.plus(DURATION_RED), EventType.TREATED, primo));
 				}
 				primo.setColor(ColorCode.TREATING);
